@@ -31,33 +31,29 @@ WORKING_DIR="$(pwd)"
 # Follow symlinks to find the real jar and detect init.d script
 cd "$(dirname "$0")" || exit 1
 [[ -z "$jarfile" ]] && jarfile=$(pwd)/$(basename "$0")
-configfile="$(basename "${jarfile%.*}.conf")"
-jarfolder="$( (cd "$(dirname "$jarfile")" && pwd -P) )"
-cd "$WORKING_DIR" || exit 1
-# Initialize CONF_FOLDER location defaulting to jarfolder
-[[ -z "$CONF_FOLDER" ]] && CONF_FOLDER="{{confFolder:${jarfolder}}}"
-
-# shellcheck source=/dev/null
-[[ -r "${CONF_FOLDER}/${configfile}" ]] && source "${CONF_FOLDER}/${configfile}"
-echo "${CONF_FOLDER}/${configfile}"
 while [[ -L "$jarfile" ]]; do
-  [[ "$jarfile" =~ init\.d ]] && init_script=$(basename "$jarfile")
+  if [[ "$jarfile" =~ init\.d ]]; then
+    init_script=$(basename "$jarfile")
+  else
+    # while looping check if their is any configuration file
+    configfile="${jarfile%.*}.conf"
+    [[ -r ${configfile} ]] && source "${configfile}"
+  fi
   jarfile=$(readlink "$jarfile")
   cd "$(dirname "$jarfile")" || exit 1
   jarfile=$(pwd)/$(basename "$jarfile")
-
-  jarfolder="$( (cd "$(dirname "$jarfile")" && pwd -P) )"
-  cd "$WORKING_DIR" || exit 1
-
-  # Source any config file
-  configfile="$(basename "${jarfile%.*}.conf")"
-  # Initialize CONF_FOLDER location defaulting to jarfolder
-  [[ -z "$CONF_FOLDER" ]] && CONF_FOLDER="{{confFolder:${jarfolder}}}"
-
-  # shellcheck source=/dev/null
-  [[ -r "${CONF_FOLDER}/${configfile}" ]] && source "${CONF_FOLDER}/${configfile}"
-   echo "${CONF_FOLDER}/${configfile}"
 done
+jarfolder="$( (cd "$(dirname "$jarfile")" && pwd -P) )"
+cd "$WORKING_DIR" || exit 1
+
+# Source any config file
+configfile="$(basename "${jarfile%.*}.conf")"
+
+# Initialize CONF_FOLDER location defaulting to jarfolder
+[[ -z "$CONF_FOLDER" ]] && CONF_FOLDER="{{confFolder:${jarfolder}}}"
+# shellcheck source=/dev/null
+[[ -r "${CONF_FOLDER}/${configfile}" ]] && source "${CONF_FOLDER}/${configfile}"
+
 # Initialize PID/LOG locations if they weren't provided by the config file
 [[ -z "$PID_FOLDER" ]] && PID_FOLDER="{{pidFolder:/var/run}}"
 [[ -z "$LOG_FOLDER" ]] && LOG_FOLDER="{{logFolder:/var/log}}"
