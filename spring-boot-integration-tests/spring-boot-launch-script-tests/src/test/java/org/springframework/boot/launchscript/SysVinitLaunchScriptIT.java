@@ -164,10 +164,10 @@ public class SysVinitLaunchScriptIT {
 //				coloredString(AnsiColor.GREEN, "Started [" + extractPid(output) + "]"));
 //	}
 //
-	@Test
-	public void basicLaunch() throws Exception {
-		doLaunch("basic-launch.sh");
-	}
+//	@Test
+//	public void basicLaunch() throws Exception {
+//		doLaunch("basic-launch.sh");
+//	}
 //
 //	@Test
 //	public void launchWithSingleCommandLineArgument() throws Exception {
