@@ -51,9 +51,9 @@ import org.springframework.boot.ansi.AnsiColor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assume.assumeThat;
+//import static org.hamcrest.Matchers.is;
+//import static org.hamcrest.Matchers.not;
+//import static org.junit.Assume.assumeThat;
 
 /**
  * Integration tests for Spring Boot's launch script on OSs that use SysVinit.
