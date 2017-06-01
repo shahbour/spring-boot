@@ -51,9 +51,9 @@ import org.springframework.boot.ansi.AnsiColor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
-//import static org.hamcrest.Matchers.is;
-//import static org.hamcrest.Matchers.not;
-//import static org.junit.Assume.assumeThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assume.assumeThat;
 
 /**
  * Integration tests for Spring Boot's launch script on OSs that use SysVinit.
@@ -144,84 +144,84 @@ public class SysVinitLaunchScriptIT {
 				coloredString(AnsiColor.GREEN, "Started [" + extractPid(output) + "]"));
 	}
 
-//	@Test
-//	public void restartWhenStarted() throws Exception {
-//		String output = doTest("restart-when-started.sh");
-//		assertThat(output).contains("Status: 0");
-//		assertThat(output).has(coloredString(AnsiColor.GREEN,
-//				"Started [" + extract("PID1", output) + "]"));
-//		assertThat(output).has(coloredString(AnsiColor.GREEN,
-//				"Stopped [" + extract("PID1", output) + "]"));
-//		assertThat(output).has(coloredString(AnsiColor.GREEN,
-//				"Started [" + extract("PID2", output) + "]"));
-//	}
-//
-//	@Test
-//	public void startWhenStopped() throws Exception {
-//		String output = doTest("start-when-stopped.sh");
-//		assertThat(output).contains("Status: 0");
-//		assertThat(output).has(
-//				coloredString(AnsiColor.GREEN, "Started [" + extractPid(output) + "]"));
-//	}
-//
-//	@Test
-//	public void basicLaunch() throws Exception {
-//		doLaunch("basic-launch.sh");
-//	}
-//
-//	@Test
-//	public void launchWithSingleCommandLineArgument() throws Exception {
-//		doLaunch("launch-with-single-command-line-argument.sh");
-//	}
-//
-//	@Test
-//	public void launchWithMultipleCommandLineArguments() throws Exception {
-//		doLaunch("launch-with-multiple-command-line-arguments.sh");
-//	}
-//
-//	@Test
-//	public void launchWithSingleRunArg() throws Exception {
-//		doLaunch("launch-with-single-run-arg.sh");
-//	}
-//
-//	@Test
-//	public void launchWithMultipleRunArgs() throws Exception {
-//		doLaunch("launch-with-multiple-run-args.sh");
-//	}
-//
+	@Test
+	public void restartWhenStarted() throws Exception {
+		String output = doTest("restart-when-started.sh");
+		assertThat(output).contains("Status: 0");
+		assertThat(output).has(coloredString(AnsiColor.GREEN,
+				"Started [" + extract("PID1", output) + "]"));
+		assertThat(output).has(coloredString(AnsiColor.GREEN,
+				"Stopped [" + extract("PID1", output) + "]"));
+		assertThat(output).has(coloredString(AnsiColor.GREEN,
+				"Started [" + extract("PID2", output) + "]"));
+	}
+
+	@Test
+	public void startWhenStopped() throws Exception {
+		String output = doTest("start-when-stopped.sh");
+		assertThat(output).contains("Status: 0");
+		assertThat(output).has(
+				coloredString(AnsiColor.GREEN, "Started [" + extractPid(output) + "]"));
+	}
+
+	@Test
+	public void basicLaunch() throws Exception {
+		doLaunch("basic-launch.sh");
+	}
+
+	@Test
+	public void launchWithSingleCommandLineArgument() throws Exception {
+		doLaunch("launch-with-single-command-line-argument.sh");
+	}
+
+	@Test
+	public void launchWithMultipleCommandLineArguments() throws Exception {
+		doLaunch("launch-with-multiple-command-line-arguments.sh");
+	}
+
+	@Test
+	public void launchWithSingleRunArg() throws Exception {
+		doLaunch("launch-with-single-run-arg.sh");
+	}
+
+	@Test
+	public void launchWithMultipleRunArgs() throws Exception {
+		doLaunch("launch-with-multiple-run-args.sh");
+	}
+
 	@Test
 	public void launchWithSingleJavaOpt() throws Exception {
 		doLaunch("launch-with-single-java-opt.sh");
 	}
-//
-//	@Test
-//	public void launchWithMultipleJavaOpts() throws Exception {
-//		doLaunch("launch-with-multiple-java-opts.sh");
-//	}
-//
-//	@Test
-//	public void launchWithUseOfStartStopDaemonDisabled() throws Exception {
-//		// CentOS doesn't have start-stop-daemon
-//		assumeThat(this.os, is(not("CentOS")));
-//		doLaunch("launch-with-use-of-start-stop-daemon-disabled.sh");
-//	}
-//
-//	@Test
-//	public void launchWithRelativePidFolder() throws Exception {
-//		String output = doTest("launch-with-relative-pid-folder.sh");
-//		assertThat(output).has(
-//				coloredString(AnsiColor.GREEN, "Started [" + extractPid(output) + "]"));
-//		assertThat(output).has(
-//				coloredString(AnsiColor.GREEN, "Running [" + extractPid(output) + "]"));
-//		assertThat(output).has(
-//				coloredString(AnsiColor.GREEN, "Stopped [" + extractPid(output) + "]"));
-//	}
-//
-//	@Test
-//	public void launchWithRelativeLogFolder() throws Exception {
-//		String output = doTest("launch-with-relative-log-folder.sh");
-//		assertThat(output).contains("Log written");
-//	}
+
+	@Test
+	public void launchWithMultipleJavaOpts() throws Exception {
+		doLaunch("launch-with-multiple-java-opts.sh");
+	}
+
+	@Test
+	public void launchWithUseOfStartStopDaemonDisabled() throws Exception {
+		// CentOS doesn't have start-stop-daemon
+		assumeThat(this.os, is(not("CentOS")));
+		doLaunch("launch-with-use-of-start-stop-daemon-disabled.sh");
+	}
+
+	@Test
+	public void launchWithRelativePidFolder() throws Exception {
+		String output = doTest("launch-with-relative-pid-folder.sh");
+		assertThat(output).has(
+				coloredString(AnsiColor.GREEN, "Started [" + extractPid(output) + "]"));
+		assertThat(output).has(
+				coloredString(AnsiColor.GREEN, "Running [" + extractPid(output) + "]"));
+		assertThat(output).has(
+				coloredString(AnsiColor.GREEN, "Stopped [" + extractPid(output) + "]"));
+	}
+
+	@Test
+	public void launchWithRelativeLogFolder() throws Exception {
+		String output = doTest("launch-with-relative-log-folder.sh");
+		assertThat(output).contains("Log written");
+	}
 
 	private void doLaunch(String script) throws Exception {
 		assertThat(doTest(script)).contains("Launched");
