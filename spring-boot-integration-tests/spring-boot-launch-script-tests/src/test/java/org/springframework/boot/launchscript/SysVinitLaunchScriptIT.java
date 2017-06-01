@@ -252,7 +252,7 @@ public class SysVinitLaunchScriptIT {
 			return output.toString();
 		}
 		finally {
-			docker.removeContainerCmd(container).exec();
+			//docker.removeContainerCmd(container).exec();
 		}
 	}
 
