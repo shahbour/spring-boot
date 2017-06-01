@@ -1,7 +1,6 @@
 install_service() {
   mkdir /test-service
   mv /spring-boot-launch-script-tests-*.jar /test-service/
-  chmod +x /test-service/spring-boot-launch-script-tests-*.jar
   ln -s /test-service/spring-boot-launch-script-tests-*.jar /test-service/spring-boot-app.jar
   ln -s /test-service/spring-boot-app.jar /etc/init.d/spring-boot-app
 }
